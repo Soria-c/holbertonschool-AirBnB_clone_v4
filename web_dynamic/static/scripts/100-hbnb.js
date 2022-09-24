@@ -9,19 +9,20 @@ window.onload = function () {
     } else {
       delete amenities[$(this)[0].attributes["data-id"].nodeValue];
     }
-    if (Object.keys(amenities).length)
+    // if (Object.keys(amenities).length)
       $(".amenities h4").text(Object.values(amenities).join(", "));
   });
 
   $("input#input-st_ct").on("change", function () {
     if ($(this).is(":checked")) {
       st_ct[$(this)[0].attributes["data-id"].nodeValue] =
-      $(this)[0].attributes["data-name"].nodeValue;
+      [$(this)[0].attributes["data-name"].nodeValue, $(this)[0].attributes["data-class"].nodeValue];
     } else {
       delete st_ct[$(this)[0].attributes["data-id"].nodeValue];
     }
-    if (Object.keys(st_ct).length)
-      $(".locations h4").text(Object.values(st_ct).join(", "));
+    // if (Object.keys(st_ct).length)
+
+      $(".locations h4").text(Object.values(st_ct).map(x => x[0]).join(", "));
   });
 
   $.ajax({
@@ -78,6 +79,7 @@ window.onload = function () {
       data: JSON.stringify(search_data),
       success: function (d) {
         for (const place of d) {
+          
           getUser(place.user_id, place);
         }
       },
@@ -89,9 +91,9 @@ window.onload = function () {
       const obj1 = [];
       const obj2 = [];
       for (const [key, value] of Object.entries(st_ct)) {
-        if (value == "cities")
+        if (value[1] == "City")
           obj2.push(key);
-        else if (value == "states")
+        else if (value[1] == "State")
           obj1.push(key);
       }
       getPlaces({"amenities": ids, "states": obj1, "cities": obj2})
