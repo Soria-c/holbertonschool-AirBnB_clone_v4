@@ -20,17 +20,17 @@
       <section class="filters">
 	<div class="locations">
 	  <h3>States</h3>
-	  <h4>&nbsp;</h4>
+	  <h4 id="h4-locations"></h4>
 	  <div class="popover">
 	    <ul>
 	      {% for state in states %}
 	      <li>
-            <input type="checkbox" style="margin-right: 10px" data-id="{{ state[0].id }}" data-name="{{ state[0].name }}">
+            <input type="checkbox" style="margin-right: 10px" data-id="{{ state[0].id }}" data-name="{{ state[0].name }}" id="input-st_ct">
             <h2>{{ state[0].name }}:</h2>
             <ul>
                 {% for city in state[1] %}
                 <li>
-                    <input type="checkbox" style="margin-right: 10px" data-id="{{ city.id }}" data-name="{{ city.name }}">
+                    <input type="checkbox" style="margin-right: 10px" data-id="{{ city.id }}" data-name="{{ city.name }}" id="input-st_ct">
                     {{ city.name }}
                 </li>
                 {% endfor %}
